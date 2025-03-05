@@ -1,46 +1,82 @@
-function filterEmails() {
-    const inputText = document.getElementById("emailInput").value.trim();
-    if (!inputText) {
-        alert("Vui lòng nhập danh sách email!");
-        return;
-    }
-
-    const lines = inputText.split("\n");
-    let emailArray = [];
-
-    lines.forEach(line => {
-        let parts = line.trim().split(/\s+/); // Tách email và mật khẩu
-        if (parts.length >= 2) {
-            emailArray.push({ email: parts[0], password: parts.slice(1).join(" ") }); // Lấy email & mật khẩu
-        }
-    });
-
-    if (emailArray.length === 0) {
-        alert("Không tìm thấy email hợp lệ!");
-    }
-
-    renderEmails(emailArray);
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 10px;
+    background-color: #f8f9fa;
 }
 
-function renderEmails(emailArray) {
-    const emailTable = document.getElementById("emailTable");
-    emailTable.innerHTML = ""; // Xóa bảng cũ
-
-    emailArray.slice(0, 20).forEach((item, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${item.email}</td>
-            <td>${item.password}</td>
-            <td><button class="copy-btn" onclick="copyEmail('${item.email}', '${item.password}')">📋</button></td>
-        `;
-        emailTable.appendChild(row);
-    });
+.container {
+    width: 95%;
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-function copyEmail(email, password) {
-    const textToCopy = `${email} ${password}`;
-    navigator.clipboard.writeText(textToCopy).then(() => {
-        alert("Đã sao chép: " + textToCopy);
-    });
+textarea {
+    width: 100%;
+    height: 120px;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 400px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+.copy-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Responsive cho điện thoại */
+@media (max-width: 600px) {
+    th, td {
+        padding: 8px;
+        font-size: 12px;
+    }
+    .copy-btn {
+        padding: 5px 8px;
+        font-size: 12px;
+    }
 }
