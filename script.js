@@ -1,15 +1,23 @@
 function filterEmails() {
-    const inputText = document.getElementById("emailInput").value;
+    const inputText = document.getElementById("emailInput").value.trim();
+    if (!inputText) {
+        alert("Vui lòng nhập danh sách email!");
+        return;
+    }
+
     const lines = inputText.split("\n");
-    
     let emailArray = [];
 
     lines.forEach(line => {
-        let parts = line.trim().split(" ");
+        let parts = line.trim().split(/\s+/); // Tách email và mật khẩu
         if (parts.length >= 2) {
-            emailArray.push(parts[0]); // Lấy phần email trước dấu cách
+            emailArray.push(parts[0]); // Chỉ lấy email
         }
     });
+
+    if (emailArray.length === 0) {
+        alert("Không tìm thấy email hợp lệ!");
+    }
 
     renderEmails(emailArray);
 }
