@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lọc Email</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Lọc Danh Sách Email</h2>
+    
+    <textarea id="emailInput" placeholder="Dán danh sách email vào đây..."></textarea>
+    <button onclick="filterEmails()">Lọc</button>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Email</th>
+                <th>Sao chép</th>
+            </tr>
+        </thead>
+        <tbody id="emailTable"></tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>
