@@ -6,17 +6,19 @@ body {
 
 textarea {
     width: 90%;
-    height: 100px;
+    height: 120px;
     margin: 10px 0;
     padding: 8px;
+    font-size: 16px;
 }
 
 button {
-    padding: 8px 12px;
+    padding: 10px 15px;
     cursor: pointer;
     background-color: #28a745;
     color: white;
     border: none;
+    font-size: 16px;
 }
 
 table {
@@ -27,7 +29,7 @@ table {
 
 th, td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 10px;
     text-align: center;
 }
 
@@ -40,6 +42,6 @@ th {
     background: #007bff;
     color: white;
     border: none;
-    padding: 5px;
+    padding: 8px;
     cursor: pointer;
 }
