@@ -29,10 +29,10 @@ function renderEmails(emailArray) {
     emailArray.slice(0, 20).forEach((item, index) => {
         const row = document.createElement("tr");
         row.innerHTML = `
+            <td><button class="copy-btn" onclick="copyEmail('${item.email}', '${item.password}')">📋</button></td>
             <td>${index + 1}</td>
             <td>${item.email}</td>
             <td>${item.password}</td>
-            <td><button class="copy-btn" onclick="copyEmail('${item.email}', '${item.password}')">📋</button></td>
         `;
         emailTable.appendChild(row);
     });
