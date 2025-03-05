@@ -7,23 +7,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Lọc Danh Sách Email & Mật Khẩu</h2>
-    
-    <textarea id="emailInput" placeholder="Dán danh sách email vào đây..."></textarea>
-    <button onclick="filterEmails()">Lọc</button>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>STT</th>
-                <th>Email</th>
-                <th>Mật khẩu</th>
-                <th>Sao chép</th>
-            </tr>
-        </thead>
-        <tbody id="emailTable"></tbody>
-    </table>
+    <div class="container">
+        <h2>Lọc Danh Sách Email & Mật Khẩu</h2>
 
+        <textarea id="emailInput" placeholder="Dán danh sách email vào đây..."></textarea>
+        <button onclick="filterEmails()">Lọc</button>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sao chép</th>
+                        <th>STT</th>
+                        <th>Email</th>
+                        <th>Mật khẩu</th>
+                    </tr>
+                </thead>
+                <tbody id="emailTable"></tbody>
+            </table>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
