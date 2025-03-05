@@ -1,47 +1,46 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 20px;
+function filterEmails() {
+    const inputText = document.getElementById("emailInput").value.trim();
+    if (!inputText) {
+        alert("Vui lòng nhập danh sách email!");
+        return;
+    }
+
+    const lines = inputText.split("\n");
+    let emailArray = [];
+
+    lines.forEach(line => {
+        let parts = line.trim().split(/\s+/); // Tách email và mật khẩu
+        if (parts.length >= 2) {
+            emailArray.push({ email: parts[0], password: parts.slice(1).join(" ") }); // Lấy email & mật khẩu
+        }
+    });
+
+    if (emailArray.length === 0) {
+        alert("Không tìm thấy email hợp lệ!");
+    }
+
+    renderEmails(emailArray);
 }
 
-textarea {
-    width: 90%;
-    height: 120px;
-    margin: 10px 0;
-    padding: 8px;
-    font-size: 16px;
+function renderEmails(emailArray) {
+    const emailTable = document.getElementById("emailTable");
+    emailTable.innerHTML = ""; // Xóa bảng cũ
+
+    emailArray.slice(0, 20).forEach((item, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${item.email}</td>
+            <td>${item.password}</td>
+            <td><button class="copy-btn" onclick="copyEmail('${item.email}', '${item.password}')">📋</button></td>
+        `;
+        emailTable.appendChild(row);
+    });
 }
 
-button {
-    padding: 10px 15px;
-    cursor: pointer;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    font-size: 16px;
-}
-
-table {
-    width: 90%;
-    margin: 20px auto;
-    border-collapse: collapse;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-}
-
-th {
-    background-color: #007bff;
-    color: white;
-}
-
-.copy-btn {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
+function copyEmail(email, password) {
+    const textToCopy = `${email} ${password}`;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("Đã sao chép: " + textToCopy);
+    });
 }
