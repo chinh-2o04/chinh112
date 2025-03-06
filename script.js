@@ -1,44 +1,34 @@
 function filterEmails() {
-    const inputText = document.getElementById("emailInput").value.trim();
-    if (!inputText) {
-        alert("Vui lòng nhập danh sách email!");
-        return;
-    }
+    let input = document.getElementById("emailInput").value;
+    let rows = input.split('\n').map(row => row.split(' '));
+    let table = document.getElementById("emailTable");
+    table.innerHTML = "<tr><th>Sao chép</th><th>Email</th><th>Mật khẩu</th></tr>";
 
-    const lines = inputText.split("\n");
-    let emailArray = [];
-    let totalXu = 0;
+    rows.forEach((data, index) => {
+        if (data.length >= 2) {
+            let row = table.insertRow();
+            let copyCell = row.insertCell(0);
+            let emailCell = row.insertCell(1);
+            let passCell = row.insertCell(2);
 
-    lines.forEach(line => {
-        let parts = line.trim().split(/\s+/);
-        if (parts.length >= 2) {
-            let email = parts[0];
-            let password = parts.slice(1).join(" ");
-            let xuMatch = password.match(/\b\d+-\d+\b/);
-            let xu = xuMatch ? parseFloat(xuMatch[0].replace("-", ".")) : 0;
-            totalXu += xu;
-            emailArray.push({ email, password, xu });
+            emailCell.textContent = data[0];
+            passCell.textContent = data[1];
+
+            let btn = document.createElement("button");
+            btn.textContent = "📋";
+            btn.className = "copy-btn";
+            btn.onclick = () => copyEmail(data[0], index + 1);
+            copyCell.appendChild(btn);
         }
     });
-
-    renderEmails(emailArray);
-    document.getElementById("totalXu").innerText = totalXu.toFixed(4);
-    document.getElementById("totalMoney").innerText = (totalXu * 55).toLocaleString();
 }
 
-function renderEmails(emailArray) {
-    const emailTable = document.getElementById("emailTable");
-    emailTable.innerHTML = "";
-    emailArray.forEach((item, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td><button class="copy-btn" onclick="copyEmail('${item.email}', '${item.password}')">📋</button></td>
-            <td>${index + 1}</td>
-            <td>${item.email}</td>
-            <td>${item.password}</td>
-            <td>${item.xu.toFixed(4)}</td>
-            <td>${(item.xu * 55).toLocaleString()}</td>
-        `;
-        emailTable.appendChild(row);
-    });
+function copyEmail(email, index) {
+    navigator.clipboard.writeText(email);
+    let notify = document.createElement("div");
+    notify.className = "notify";
+    notify.textContent = `Đã sao chép mail ${index}`;
+    document.body.appendChild(notify);
+    notify.style.display = "block";
+    setTimeout(() => notify.remove(), 1500);
 }
