@@ -1,6 +1,6 @@
 function filterEmails() {
-    let input = document.getElementById("emailInput").value;
-    let rows = input.split('\n').map(row => row.split(' '));
+    let input = document.getElementById("emailInput").value.trim();
+    let rows = input.split('\n').map(row => row.trim().split(/\s+/));
     let table = document.getElementById("emailTable");
     table.innerHTML = "<tr><th>Sao chép</th><th>Email</th><th>Mật khẩu</th></tr>";
 
@@ -17,18 +17,31 @@ function filterEmails() {
             let btn = document.createElement("button");
             btn.textContent = "📋";
             btn.className = "copy-btn";
-            btn.onclick = () => copyEmail(data[0], index + 1);
+            btn.onclick = function() {
+                copyEmail(data[0], index + 1);
+            };
+
             copyCell.appendChild(btn);
         }
     });
 }
 
 function copyEmail(email, index) {
-    navigator.clipboard.writeText(email);
+    navigator.clipboard.writeText(email).then(() => {
+        showNotification(`Đã sao chép mail ${index}`);
+    }).catch(err => {
+        showNotification("Lỗi sao chép!");
+    });
+}
+
+function showNotification(message) {
     let notify = document.createElement("div");
     notify.className = "notify";
-    notify.textContent = `Đã sao chép mail ${index}`;
+    notify.textContent = message;
     document.body.appendChild(notify);
-    notify.style.display = "block";
-    setTimeout(() => notify.remove(), 1500);
+    
+    setTimeout(() => {
+        notify.style.opacity = "0";
+        setTimeout(() => notify.remove(), 500);
+    }, 1500);
 }
