@@ -1,22 +1,11 @@
-function convertMoney(rate) {
-    let xu = parseFloat(document.getElementById("xuInput").value);
-    if (isNaN(xu) || xu <= 0) {
-        alert("Vui lòng nhập số xu hợp lệ!");
-        return;
-    }
-    document.getElementById("convertedMoney").innerText = (xu * rate).toLocaleString();
+function convertXu(rate) {
+    let input = document.getElementById("xuInput").value;
+    let values = input.match(/\d+/g);
+    let total = values ? values.reduce((sum, val) => sum + parseInt(val), 0) : 0;
+    document.getElementById("result").textContent = `Số tiền nhận được: ${(total / 1000 * rate).toLocaleString()} VND`;
 }
 
 function customConvert() {
-    document.getElementById("customRate").style.display = "block";
-    document.getElementById("customConvertBtn").style.display = "block";
-}
-
-function applyCustomRate() {
-    let customRate = parseFloat(document.getElementById("customRate").value);
-    if (isNaN(customRate) || customRate <= 0) {
-        alert("Vui lòng nhập số tiền hợp lệ!");
-        return;
-    }
-    convertMoney(customRate);
+    let rate = parseInt(document.getElementById("customRate").value) || 0;
+    convertXu(rate);
 }
