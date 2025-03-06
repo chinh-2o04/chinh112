@@ -1,44 +1,38 @@
-function filterEmails() {
-    const inputText = document.getElementById("emailInput").value.trim();
+document.getElementById("filterBtn").addEventListener("click", function() {
+    let inputText = document.getElementById("emailInput").value.trim();
     if (!inputText) {
         alert("Vui lòng nhập danh sách email!");
         return;
     }
 
-    const lines = inputText.split("\n");
-    let emailArray = [];
-    let totalXu = 0;
+    let lines = inputText.split(/\n/);
+    let emailList = [];
 
     lines.forEach(line => {
         let parts = line.trim().split(/\s+/);
-        if (parts.length >= 2) {
-            let email = parts[0];
-            let password = parts.slice(1).join(" ");
-            let xuMatch = password.match(/\b\d+-\d+\b/);
-            let xu = xuMatch ? parseFloat(xuMatch[0].replace("-", ".")) : 0;
-            totalXu += xu;
-            emailArray.push({ email, password, xu });
+        if (parts.length === 2) {
+            emailList.push({ email: parts[0], password: parts[1] });
         }
     });
 
-    renderEmails(emailArray);
-    document.getElementById("totalXu").innerText = totalXu.toFixed(4);
-    document.getElementById("totalMoney").innerText = (totalXu * 55).toLocaleString();
-}
+    let tableBody = document.querySelector("#emailTable tbody");
+    tableBody.innerHTML = "";
 
-function renderEmails(emailArray) {
-    const emailTable = document.getElementById("emailTable");
-    emailTable.innerHTML = "";
-    emailArray.forEach((item, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td><button class="copy-btn" onclick="copyEmail('${item.email}', '${item.password}')">📋</button></td>
-            <td>${index + 1}</td>
-            <td>${item.email}</td>
-            <td>${item.password}</td>
-            <td>${item.xu.toFixed(4)}</td>
-            <td>${(item.xu * 55).toLocaleString()}</td>
-        `;
-        emailTable.appendChild(row);
+    emailList.forEach((item, index) => {
+        let row = tableBody.insertRow();
+        
+        // Nút sao chép
+        let copyCell = row.insertCell(0);
+        let copyBtn = document.createElement("button");
+        copyBtn.innerText = "📋";
+        copyBtn.onclick = function() {
+            navigator.clipboard.writeText(`${item.email} ${item.password}`);
+            alert(`Đã sao chép: ${item.email}`);
+        };
+        copyCell.appendChild(copyBtn);
+        
+        row.insertCell(1).innerText = index + 1;
+        row.insertCell(2).innerText = item.email;
+        row.insertCell(3).innerText = item.password;
     });
-}
+});
