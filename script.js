@@ -28,9 +28,9 @@ function filterEmails() {
 
 function copyEmail(email, index) {
     navigator.clipboard.writeText(email).then(() => {
-        showNotification(`Đã sao chép mail ${index}`);
-    }).catch(err => {
-        showNotification("Lỗi sao chép!");
+        showNotification(`📩 Đã sao chép mail ${index}`);
+    }).catch(() => {
+        showNotification("❌ Lỗi sao chép!");
     });
 }
 
@@ -45,3 +45,4 @@ function showNotification(message) {
         setTimeout(() => notify.remove(), 500);
     }, 1500);
 }
+
