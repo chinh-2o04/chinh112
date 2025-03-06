@@ -3,40 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lọc Danh Sách Email & Mật Khẩu</title>
+    <title>Lọc Danh Sách Email</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h2>Lọc Danh Sách Email & Mật Khẩu</h2>
 
-        <button onclick="window.location.href='exchange.html'" class="exchange-btn">đổi 💰</button>
-
         <textarea id="emailInput" placeholder="Dán danh sách email vào đây..."></textarea>
-        <button onclick="filterEmails()">Lọc</button>
+        
+        <button id="filterBtn">Lọc</button>
 
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Sao chép</th>
-                        <th>STT</th>
-                        <th>Email</th>
-                        <th>Mật khẩu</th>
-                        <th>Xu</th>
-                        <th>Tiền (55k)</th>
-                    </tr>
-                </thead>
-                <tbody id="emailTable"></tbody>
-            </table>
-        </div>
+        <table id="emailTable">
+            <thead>
+                <tr>
+                    <th>Sao chép</th>
+                    <th>STT</th>
+                    <th>Email</th>
+                    <th>Mật khẩu</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
 
-        <div class="total">
-            <strong>Tổng xu:</strong> <span id="totalXu">0</span> | 
-            <strong>Tổng tiền (55k):</strong> <span id="totalMoney">0</span> VND
-        </div>
-
-        <div id="copyNotification"></div>
+        <button onclick="window.location.href='exchange.html'">💰 Đổi Xu</button>
     </div>
     <script src="script.js"></script>
 </body>
