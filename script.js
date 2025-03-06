@@ -1,38 +1,63 @@
-document.getElementById("filterBtn").addEventListener("click", function() {
-    let inputText = document.getElementById("emailInput").value.trim();
-    if (!inputText) {
-        alert("Vui lòng nhập danh sách email!");
-        return;
-    }
-
-    let lines = inputText.split(/\n/);
-    let emailList = [];
+function filterEmails() {
+    const inputText = document.getElementById("emailInput").value.trim();
+    const lines = inputText.split("\n");
+    let emailArray = [];
 
     lines.forEach(line => {
-        let parts = line.trim().split(/\s+/);
-        if (parts.length === 2) {
-            emailList.push({ email: parts[0], password: parts[1] });
+        const parts = line.trim().split(" ");
+        if (parts.length >= 2) {
+            const email = parts[0];
+            const password = parts.slice(1).join(" ");
+            const xuMatch = email.match(/(\d+)-(\d+)/);
+
+            let xu = 0;
+            if (xuMatch) {
+                xu = parseInt(xuMatch[1]) || 0;
+            }
+
+            emailArray.push({ email, password, xu });
         }
     });
 
-    let tableBody = document.querySelector("#emailTable tbody");
-    tableBody.innerHTML = "";
+    renderEmails(emailArray);
+}
 
-    emailList.forEach((item, index) => {
-        let row = tableBody.insertRow();
-        
-        // Nút sao chép
-        let copyCell = row.insertCell(0);
-        let copyBtn = document.createElement("button");
-        copyBtn.innerText = "📋";
-        copyBtn.onclick = function() {
-            navigator.clipboard.writeText(`${item.email} ${item.password}`);
-            alert(`Đã sao chép: ${item.email}`);
-        };
-        copyCell.appendChild(copyBtn);
-        
-        row.insertCell(1).innerText = index + 1;
-        row.insertCell(2).innerText = item.email;
-        row.insertCell(3).innerText = item.password;
+function renderEmails(emailArray) {
+    const emailTable = document.getElementById("emailTable");
+    emailTable.innerHTML = "";
+    emailArray.forEach((item, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td><button class="copy-btn" onclick="copyEmail(${index}, '${item.email}', '${item.password}')">📋</button></td>
+            <td>${index + 1}</td>
+            <td>${item.email}</td>
+            <td>${item.password}</td>
+            <td>${item.xu.toFixed(4)}</td>
+            <td>${(item.xu * 55).toLocaleString()}</td>
+        `;
+        emailTable.appendChild(row);
     });
-});
+}
+
+function copyEmail(index, email, password) {
+    const textToCopy = `${email} ${password}`;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        showCopyNotification(index);
+    }).catch(err => {
+        alert("Lỗi sao chép, thử lại!");
+    });
+}
+
+function showCopyNotification(index) {
+    const notification = document.getElementById("copyNotification");
+    notification.innerText = `Đã sao chép mail ${index + 1}`;
+    notification.style.display = "block";
+
+    setTimeout(() => {
+        notification.style.display = "none";
+    }, 1500);
+}
+
+function openConvertPage() {
+    window.location.href = "convert.html";
+}
