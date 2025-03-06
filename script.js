@@ -17,16 +17,19 @@ function filterEmails() {
             let btn = document.createElement("button");
             btn.textContent = "📋";
             btn.className = "copy-btn";
-            btn.onclick = function() {
-                copyEmail(data[0], index + 1);
-            };
+            btn.setAttribute("data-email", data[0]);
+            btn.setAttribute("data-index", index + 1);
+            btn.addEventListener("click", copyEmail);
 
             copyCell.appendChild(btn);
         }
     });
 }
 
-function copyEmail(email, index) {
+function copyEmail(event) {
+    let email = event.target.getAttribute("data-email");
+    let index = event.target.getAttribute("data-index");
+
     navigator.clipboard.writeText(email).then(() => {
         showNotification(`📩 Đã sao chép mail ${index}`);
     }).catch(() => {
@@ -45,4 +48,3 @@ function showNotification(message) {
         setTimeout(() => notify.remove(), 500);
     }, 1500);
 }
-
