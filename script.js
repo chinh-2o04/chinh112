@@ -1,34 +1,41 @@
-document.getElementById("pasteButton").addEventListener("click", async function() {
-    try {
-        const text = await navigator.clipboard.readText();
-        document.getElementById("emailInput").value = text;
-    } catch (err) {
-        alert("Không thể dán, vui lòng cấp quyền clipboard!");
-    }
-});
-
 function filterEmails() {
-    let input = document.getElementById("emailInput").value;
-    let rows = input.split(/\n|\r|\r\n/).map(row => row.trim()).filter(row => row);
-    let table = document.getElementById("emailTable");
-    table.innerHTML = `<tr><th>STT</th><th>Sao chép</th><th>Email</th><th>Mật khẩu</th></tr>`;
+    let input = document.getElementById("emailInput").value.trim();
+    let lines = input.split(/\n| /);
+    let tableBody = document.querySelector("#emailTable tbody");
+    tableBody.innerHTML = "";
 
-    rows.forEach((row, index) => {
-        let parts = row.split(/\s+|\|/);
-        if (parts.length >= 2) {
-            let email = parts[0];
-            let password = parts.slice(1).join(" ");
-            let newRow = table.insertRow();
-            newRow.innerHTML = `<td>${index + 1}</td>
-                                <td><button class='copy-btn' onclick='copyToClipboard("${email} ${password}")'>📋</button></td>
-                                <td>${email}</td>
-                                <td>${password}</td>`;
+    let index = 1;
+    lines.forEach(line => {
+        let parts = line.split(" ");
+        if (parts.length === 2) {
+            let row = `<tr>
+                <td>${index}</td>
+                <td><button onclick="copyEmail('${parts[0]}', '${parts[1]}', ${index})">📋</button></td>
+                <td>${parts[0]}</td>
+                <td>${parts[1]}</td>
+            </tr>`;
+            tableBody.innerHTML += row;
+            index++;
         }
     });
 }
 
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        alert("Đã sao chép: " + text);
+function copyEmail(email, password, index) {
+    let textToCopy = `${email} ${password}`;
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        showToast(`📋 Đã sao chép mail ${index}`);
     });
+}
+
+function showToast(message) {
+    let toastContainer = document.getElementById("toast-container");
+    let toast = document.createElement("div");
+    toast.className = "toast";
+    toast.innerHTML = message;
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = "0";
+        setTimeout(() => toast.remove(), 500);
+    }, 3000);
 }
