@@ -71,12 +71,31 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    font-size: 16px;
+    table-layout: fixed;
 }
 
 th, td {
     border: 1px solid #ccc;
     padding: 8px;
     text-align: center;
+    word-wrap: break-word;
+}
+
+th {
+    background: #007bff;
+    color: white;
+}
+
+/* Giới hạn bảng trên điện thoại */
+@media screen and (max-width: 480px) {
+    table {
+        font-size: 14px;
+    }
+
+    td, th {
+        padding: 6px;
+    }
 }
 
 /* Hiển thị thông báo sao chép */
