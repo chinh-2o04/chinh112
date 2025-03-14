@@ -1,12 +1,12 @@
 function formatInput() {
     let input = document.getElementById("xuInput");
-    input.value = input.value.replace(/[^0-9]/g, ""); // Chỉ cho nhập số
+    input.value = input.value.replace(/[^0-9]/g, "");
 }
 
 function convertXu(rate) {
     let xu = parseInt(document.getElementById("xuInput").value);
     if (isNaN(xu) || xu <= 0) {
-        document.getElementById("result").innerHTML = "⚠️ Vui lòng nhập số xu hợp lệ!";
+        showToast("⚠️ Vui lòng nhập số xu hợp lệ!");
         return;
     }
 
