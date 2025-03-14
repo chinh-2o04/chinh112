@@ -8,17 +8,20 @@
 </head>
 <body>
     <div class="container">
-        <h2>Lọc Email & Mật Khẩu</h2>
-        <textarea id="emailInput" placeholder="Dán danh sách email vào đây..."></textarea>
-        <button onclick="filterEmails()">Lọc</button>
-        <table id="emailTable">
-            <tr>
-                <th>Sao chép</th>
-                <th>Email</th>
-                <th>Mật khẩu</th>
-            </tr>
-        </table>
-        <button onclick="window.location.href='exchange.html'">🔄 Đổi Xu</button>
+        <h2>Lọc Email</h2>
+        <button id="pasteButton">📋 Dán nhanh</button>
+        <textarea id="emailInput" placeholder="Dán danh sách email ở đây..."></textarea>
+        <button onclick="filterEmails()">Lọc Mail</button>
+        <div class="table-container">
+            <table id="emailTable">
+                <tr>
+                    <th>STT</th>
+                    <th>Sao chép</th>
+                    <th>Email</th>
+                    <th>Mật khẩu</th>
+                </tr>
+            </table>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
