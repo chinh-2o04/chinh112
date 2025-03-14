@@ -1,23 +1,38 @@
+document.getElementById("pasteButton").addEventListener("click", function () {
+    navigator.clipboard.readText().then(text => {
+        document.getElementById("emailInput").value = text;
+    }).catch(err => {
+        showToast("⚠️ Không thể dán! Hãy cấp quyền truy cập clipboard.");
+    });
+});
+
 function filterEmails() {
     let input = document.getElementById("emailInput").value.trim();
-    let lines = input.split(/\n| /);
+    let lines = input.split(/\n/); // Chia theo từng dòng
     let tableBody = document.querySelector("#emailTable tbody");
     tableBody.innerHTML = "";
 
     let index = 1;
     lines.forEach(line => {
-        let parts = line.split(" ");
-        if (parts.length === 2) {
+        let parts = line.split(/\s+/);
+        if (parts.length >= 2) {
+            let email = parts[0];
+            let password = parts.slice(1).join(" ");
+
             let row = `<tr>
                 <td>${index}</td>
-                <td><button onclick="copyEmail('${parts[0]}', '${parts[1]}', ${index})">📋</button></td>
-                <td>${parts[0]}</td>
-                <td>${parts[1]}</td>
+                <td><button onclick="copyEmail('${email}', '${password}', ${index})">📋</button></td>
+                <td>${email}</td>
+                <td>${password}</td>
             </tr>`;
             tableBody.innerHTML += row;
             index++;
         }
     });
+
+    if (index === 1) {
+        showToast("⚠️ Không tìm thấy email hợp lệ!");
+    }
 }
 
 function copyEmail(email, password, index) {
