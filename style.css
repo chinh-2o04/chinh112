@@ -8,9 +8,9 @@ body {
     max-width: 100%;
     padding: 10px;
 }
-textarea {
+textarea, input {
     width: 95%;
-    height: 150px;
+    height: 40px;
     margin: 10px 0;
     padding: 8px;
     font-size: 16px;
