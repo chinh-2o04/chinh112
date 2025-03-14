@@ -2,15 +2,12 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 10px;
-    padding: 0;
     background-color: #f4f4f4;
 }
-
 .container {
     max-width: 100%;
     padding: 10px;
 }
-
 textarea {
     width: 95%;
     height: 150px;
@@ -20,7 +17,6 @@ textarea {
     border-radius: 5px;
     border: 1px solid #ccc;
 }
-
 button {
     background-color: #007bff;
     color: white;
@@ -31,17 +27,13 @@ button {
     cursor: pointer;
     margin: 5px;
 }
-
 button:hover {
     background-color: #0056b3;
 }
-
-/* Điều chỉnh bảng cho mobile */
 .table-container {
     width: 100%;
     overflow-x: auto;
 }
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -49,18 +41,15 @@ table {
     border-radius: 5px;
     overflow: hidden;
 }
-
 th, td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
 }
-
 th {
     background: #007bff;
     color: white;
 }
-
 .copy-btn {
     background: #28a745;
     border: none;
@@ -70,46 +59,6 @@ th {
     cursor: pointer;
     border-radius: 3px;
 }
-
 .copy-btn:hover {
     background: #218838;
-}
-
-/* Hiệu ứng thông báo sao chép */
-.notify {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-size: 14px;
-    opacity: 1;
-    transition: opacity 0.5s ease-out;
-}
-
-/* Responsive cho mobile */
-@media (max-width: 600px) {
-    button {
-        width: 100%;
-        font-size: 14px;
-        padding: 12px;
-    }
-
-    th, td {
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    .copy-btn {
-        font-size: 12px;
-        padding: 6px;
-    }
-
-    .notify {
-        font-size: 12px;
-        padding: 8px 12px;
-    }
 }
