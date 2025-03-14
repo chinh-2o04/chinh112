@@ -9,13 +9,13 @@
 <body>
     <div class="container">
         <h2>Quy Đổi Xu</h2>
-        <textarea id="xuInput" placeholder="Nhập danh sách xu... (VD: 1000-5000)"></textarea>
-        <button onclick="convertXu(70)">Quy đổi 70K</button>
-        <button onclick="convertXu(55)">Quy đổi 55K</button>
-        <input type="number" id="customRate" placeholder="Nhập số tiền/XU">
-        <button onclick="customConvert()">Quy đổi tự nhập</button>
-        <p id="result"></p>
-        <button onclick="window.location.href='index.html'">🏠 Quay Lại</button>
+        <input type="number" id="xuAmount" placeholder="Nhập số xu..." />
+        <button onclick="exchange(70)">💰 70$/1000 Xu</button>
+        <button onclick="exchange(55)">💰 55$/1000 Xu</button>
+        <input type="number" id="customRate" placeholder="Nhập tỷ lệ" />
+        <button onclick="customExchange()">💰 Tự nhập</button>
+        <h3 id="result"></h3>
+        <button onclick="window.location.href='index.html'">⬅ Quay lại</button>
     </div>
     <script src="exchange.js"></script>
 </body>
