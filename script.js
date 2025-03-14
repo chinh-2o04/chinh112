@@ -8,7 +8,7 @@ document.getElementById("pasteButton").addEventListener("click", function () {
 
 function filterEmails() {
     let input = document.getElementById("emailInput").value.trim();
-    let lines = input.split(/\n/); // Chia theo từng dòng
+    let lines = input.split(/\n/);
     let tableBody = document.querySelector("#emailTable tbody");
     tableBody.innerHTML = "";
 
@@ -16,8 +16,8 @@ function filterEmails() {
     lines.forEach(line => {
         let parts = line.split(/\s+/);
         if (parts.length >= 2) {
-            let email = parts[0];
-            let password = parts.slice(1).join(" ");
+            let email = parts.shift();
+            let password = parts.join(" ");
 
             let row = `<tr>
                 <td>${index}</td>
