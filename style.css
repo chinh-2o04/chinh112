@@ -1,13 +1,25 @@
+/* Reset mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Căn chỉnh tổng thể */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin: 10px;
     background-color: #f4f4f4;
+    margin: 10px;
 }
+
+/* Container chính */
 .container {
     max-width: 100%;
     padding: 10px;
 }
+
+/* Ô nhập dữ liệu */
 textarea, input {
     width: 95%;
     height: 40px;
@@ -17,6 +29,8 @@ textarea, input {
     border-radius: 5px;
     border: 1px solid #ccc;
 }
+
+/* Nút bấm */
 button {
     background-color: #007bff;
     color: white;
@@ -30,6 +44,8 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+/* Chỉnh sửa bảng */
 .table-container {
     width: 100%;
     overflow-x: auto;
@@ -50,6 +66,8 @@ th {
     background: #007bff;
     color: white;
 }
+
+/* Nút sao chép */
 .copy-btn {
     background: #28a745;
     border: none;
@@ -61,4 +79,19 @@ th {
 }
 .copy-btn:hover {
     background: #218838;
+}
+
+/* Hiển thị thông báo sao chép */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
 }
