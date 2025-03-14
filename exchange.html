@@ -1,81 +1,30 @@
-/* Reset mặc định */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quy Đổi Xu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>💰 Quy Đổi Xu</h2>
 
-/* Căn chỉnh tổng thể */
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
-    padding: 20px;
-}
+        <input type="text" id="xuInput" placeholder="Nhập số xu..." oninput="formatInput()">
+        
+        <div class="button-group">
+            <button onclick="convertXu(70)">🔄 Đổi 70k</button>
+            <button onclick="convertXu(55)">🔄 Đổi 55k</button>
+            <button onclick="customConvert()">✏️ Nhập Giá</button>
+        </div>
 
-/* Container chính */
-.container {
-    max-width: 400px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin: auto;
-}
+        <p id="result"></p>
 
-/* Tiêu đề */
-h2 {
-    color: #333;
-    margin-bottom: 15px;
-}
+        <button class="switch-btn" onclick="window.location.href='index.html'">⬅️ Quay Lại</button>
+    </div>
 
-/* Ô nhập xu */
-input {
-    width: 100%;
-    padding: 10px;
-    font-size: 18px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
+    <div id="toast-container"></div>
 
-/* Nhóm nút */
-.button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* Nút bấm */
-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 12px;
-    font-size: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Nút quay lại */
-.back-btn {
-    margin-top: 20px;
-    background-color: #28a745;
-}
-
-.back-btn:hover {
-    background-color: #218838;
-}
-
-/* Kết quả */
-#result {
-    font-size: 20px;
-    margin-top: 20px;
-    font-weight: bold;
-    color: #333;
-}
+    <script src="exchange.js"></script>
+</body>
+</html>
