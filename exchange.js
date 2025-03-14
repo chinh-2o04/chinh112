@@ -1,20 +1,24 @@
-function exchange(rate) {
-    let xu = document.getElementById("xuAmount").value;
-    if (xu === "" || isNaN(xu) || xu <= 0) {
-        alert("Vui lòng nhập số xu hợp lệ!");
-        return;
-    }
-    let money = (xu / 1000) * rate;
-    document.getElementById("result").innerText = `Bạn nhận được: ${money.toFixed(2)}$`;
+function formatInput() {
+    let input = document.getElementById("xuInput");
+    input.value = input.value.replace(/[^0-9]/g, ""); // Chỉ cho nhập số
 }
 
-function customExchange() {
-    let xu = document.getElementById("xuAmount").value;
-    let customRate = document.getElementById("customRate").value;
-    if (xu === "" || isNaN(xu) || xu <= 0 || customRate === "" || isNaN(customRate) || customRate <= 0) {
-        alert("Vui lòng nhập số xu và tỷ lệ hợp lệ!");
+function convertXu(rate) {
+    let xu = parseInt(document.getElementById("xuInput").value);
+    if (isNaN(xu) || xu <= 0) {
+        document.getElementById("result").innerHTML = "⚠️ Vui lòng nhập số xu hợp lệ!";
         return;
     }
-    let money = (xu / 1000) * customRate;
-    document.getElementById("result").innerText = `Bạn nhận được: ${money.toFixed(2)}$`;
+
+    let amount = (xu / 1000) * rate;
+    document.getElementById("result").innerHTML = `💰 Số tiền nhận được: <b>${amount.toLocaleString()} VNĐ</b>`;
+}
+
+function customConvert() {
+    let rate = prompt("Nhập số tiền quy đổi cho 1000 xu:", "60");
+    if (rate !== null && !isNaN(rate) && rate > 0) {
+        convertXu(parseFloat(rate));
+    } else {
+        alert("⚠️ Vui lòng nhập số hợp lệ!");
+    }
 }
